@@ -2,6 +2,7 @@
  * Created by Jacky.Gao on 2017-02-09.
  */
 import {alert} from '../MsgBox.js';
+import {getToken} from '../Utils.js'
 
 export default class EditPropertyConditionDialog{
     constructor(conditions){
@@ -59,6 +60,9 @@ export default class EditPropertyConditionDialog{
             $.ajax({
                 url,
                 type:'POST',
+                headers: {
+                    Authorization: getToken()
+                },
                 data:{content:val},
                 success:function(errors){
                     if(errors.length>0){
@@ -105,6 +109,9 @@ export default class EditPropertyConditionDialog{
             $.ajax({
                 url,
                 type:'POST',
+                headers: {
+                    Authorization: getToken()
+                },
                 data:{content:val},
                 success:function(errors){
                     if(errors.length>0){

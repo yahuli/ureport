@@ -3,6 +3,7 @@
  */
 import {formatDate,resetDirty} from '../Utils.js';
 import {alert,confirm} from '../MsgBox.js';
+import {getToken} from '../Utils.js'
 
 export default class SaveDialog{
     constructor(){
@@ -67,6 +68,9 @@ export default class SaveDialog{
                         let fullFile=value+file.name;
                         $.ajax({
                             type:'POST',
+                            headers: {
+                                Authorization: getToken()
+                            },
                             data:{file:fullFile},
                             url:window._server+"/designer/deleteReportFile",
                             success:function(){
@@ -116,6 +120,9 @@ export default class SaveDialog{
             fileName=_this.currentProviderPrefix+fileName+".ureport.xml";
             $.ajax({
                 url:window._server+"/designer/saveReportFile",
+                headers: {
+                    Authorization: getToken()
+                },
                 data:{file:fileName,content:_this.content},
                 type:'POST',
                 success:function(){
@@ -146,6 +153,9 @@ export default class SaveDialog{
         const _this=this;
         $.ajax({
             url:window._server+'/designer/loadReportProviders',
+            headers: {
+                Authorization: getToken()
+            },
             success:function(providers){
                 for(let provider of providers){
                     let {reportFiles,name,prefix}=provider;

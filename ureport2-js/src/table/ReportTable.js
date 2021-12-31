@@ -5,6 +5,7 @@ import * as utils from '../Utils.js';
 import {afterRenderer} from './CellRenderer.js';
 import buildMenuConfigure from './ContextMenu.js';
 import Handsontable from 'handsontable';
+import {getToken} from '../Utils.js'
 
 export default class ReportTable{
     constructor(container,callback){
@@ -104,6 +105,9 @@ export default class ReportTable{
         const url=window._server+"/designer/loadReport";
         $.ajax({
             url,
+            headers: {
+                Authorization: getToken()
+            },
             type:'POST',
             data:{file},
             success:function(reportDef){

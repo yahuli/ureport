@@ -3,6 +3,7 @@
  */
 import {alert} from '../MsgBox.js';
 import {setDirty} from '../Utils.js';
+import {getToken} from '../Utils.js'
 
 export default class DatasourceDialog{
     constructor(datasources){
@@ -135,6 +136,9 @@ export default class DatasourceDialog{
         const _this=this;
         $.ajax({
             url:window._server+"/datasource/testConnection",
+            headers: {
+                Authorization: getToken()
+            },
             data:{username,password,driver,url},
             type:"POST",
             success:function(data){

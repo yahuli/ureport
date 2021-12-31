@@ -5,6 +5,7 @@ import uuid from 'node-uuid';
 import {alert,confirm,dialog} from '../MsgBox.js';
 import BeanMethodDialog from '../dialog/BeanMethodDialog.js';
 import BaseTree from './BaseTree.js';
+import {getToken} from '../Utils.js'
 
 export default class DatabaseTree extends BaseTree{
     constructor(container,datasources,ds,springDialog,context){
@@ -156,6 +157,9 @@ export default class DatabaseTree extends BaseTree{
         }
         $.ajax({
             url:window._server+"/datasource/buildClass",
+            headers: {
+                Authorization: getToken()
+            },
             data: {
                 clazz:dataset.clazz
             },

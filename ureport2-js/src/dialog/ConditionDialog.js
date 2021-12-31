@@ -2,6 +2,7 @@
  * Created by Jacky.Gao on 2017-02-09.
  */
 import {alert} from '../MsgBox.js';
+import {getToken} from '../Utils.js'
 
 export default class ConditionDialog{
     constructor(conditions){
@@ -62,6 +63,9 @@ export default class ConditionDialog{
             $.ajax({
                 url,
                 type:'POST',
+                headers: {
+                    Authorization: getToken()
+                },
                 data:{content:val},
                 success:function(errors){
                     if(errors.length>0){

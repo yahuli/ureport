@@ -8,6 +8,7 @@ import ParameterTable from './ParameterTable.js';
 import {alert} from '../MsgBox.js';
 import {setDirty} from '../Utils.js';
 import PreviewDataDialog from './PreviewDataDialog.js'
+import {getToken} from '../Utils.js'
 export default class SqlDatasetDialog{
     constructor(db,data){
         this.db=db;
@@ -105,6 +106,9 @@ export default class SqlDatasetDialog{
             $.ajax({
                 url,
                 data:{content:text},
+                headers: {
+                    Authorization: getToken()
+                },
                 type:'POST',
                 success:function(result){
                     if(result){
@@ -161,6 +165,9 @@ export default class SqlDatasetDialog{
             const url=window._server+"/datasource/previewData";
             $.ajax({
                 type:'POST',
+                headers: {
+                    Authorization: getToken()
+                },
                 url,
                 data:parameters,
                 success:function(data){
@@ -248,6 +255,9 @@ export default class SqlDatasetDialog{
         const url=window._server+"/datasource/buildDatabaseTables";
         $.ajax({
             type:"POST",
+            headers: {
+                Authorization: getToken()
+            },
             data:parameters,
             url,
             success:function(tables){

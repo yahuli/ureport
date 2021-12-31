@@ -16,6 +16,25 @@ import '../node_modules/codemirror/mode/javascript/javascript.js';
 import UReportDesigner from './designer.js';
 import buildLocal from  './i18n/i18n.js';
 
+function getQueryVariable(variable) {
+       var query = window.location.search.substring(1);
+       var vars = query.split("&");
+       for (var i=0;i<vars.length;i++) {
+               var pair = vars[i].split("=");
+               if(pair[0] == variable){return pair[1];}
+       }
+       return(false);
+}
+
+let token = getQueryVariable('token')
+
+if (!token) {
+    console.warn('未获取到token')
+} else {
+    token = decodeURI(token)
+    window.sessionStorage.setItem('token', token)
+}
+
 $(document).ready(function(){
     buildLocal();
     const designer=new UReportDesigner("container");

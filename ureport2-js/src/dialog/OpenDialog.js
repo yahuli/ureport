@@ -3,6 +3,7 @@
  */
 import {formatDate,resetDirty} from '../Utils.js';
 import {alert,confirm} from '../MsgBox.js';
+import {getToken} from '../Utils.js'
 
 export default class OpenDialog{
     constructor(context){
@@ -81,6 +82,9 @@ export default class OpenDialog{
                         let fullFile=value+file.name;
                         $.ajax({
                             type:'POST',
+                            headers: {
+                                Authorization: getToken()
+                            },
                             data:{file:fullFile},
                             url:window._server+"/designer/deleteReportFile",
                             success:function(){
@@ -110,6 +114,9 @@ export default class OpenDialog{
         const _this=this;
         $.ajax({
             url:window._server+'/designer/loadReportProviders',
+            headers: {
+                Authorization: getToken()
+            },
             success:function(providers){
                 for(let provider of providers){
                     let {reportFiles,name,prefix}=provider;

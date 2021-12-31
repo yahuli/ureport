@@ -4,6 +4,7 @@
 import Tool from './Tool.js';
 import {tableToXml} from '../Utils.js';
 import {alert} from '../MsgBox.js';
+import {getToken} from '../Utils.js'
 
 export default class PreviewTool extends Tool{
     execute(){
@@ -46,6 +47,9 @@ export default class PreviewTool extends Tool{
         const content=tableToXml(this.context);
         $.ajax({
             url:window._server+"/designer/savePreviewData",
+            headers: {
+                Authorization: getToken()
+            },
             type:'POST',
             data:{content},
             success:function(){

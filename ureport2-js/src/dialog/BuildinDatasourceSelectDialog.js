@@ -3,6 +3,7 @@
  */
 import {alert} from '../MsgBox.js';
 import {setDirty} from '../Utils.js';
+import {getToken} from '../Utils.js'
 
 export default class BuildinDatasourceSelectDialog{
     constructor(datasources){
@@ -41,6 +42,9 @@ export default class BuildinDatasourceSelectDialog{
         const _this=this;
         $.ajax({
             url:window._server+"/datasource/loadBuildinDatasources",
+            headers: {
+                Authorization: getToken()
+            },
             success:function(result){
                 for(let name of result){
                     const tr=$(`<tr style="height: 35px;"><td style="vertical-align: middle">${name}</td></tr>`);

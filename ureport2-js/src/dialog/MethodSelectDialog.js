@@ -2,6 +2,7 @@
  * Created by Jacky.Gao on 2017-02-07.
  */
 import {alert} from '../MsgBox.js';
+import {getToken} from '../Utils.js'
 
 export default class MethodSelectDialog{
     constructor(){
@@ -38,6 +39,9 @@ export default class MethodSelectDialog{
         const _this=this;
         $.ajax({
             url:window._server+"/datasource/loadMethods",
+            headers: {
+                Authorization: getToken()
+            },
             data:{beanId},
             success:function(result){
                 for(let method of result){

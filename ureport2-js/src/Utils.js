@@ -754,4 +754,14 @@ export function buildPageSizeList(){
     }
 }
 
+// 获取localstorage中的token
+export function getToken() {
+    let token = window.sessionStorage.getItem('token')
+    if (!token) {
+        console.warn("token 不存在")
+        token = ''
+    }
+    return token
+}
+
 export const undoManager=new UndoManager();

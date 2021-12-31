@@ -3,6 +3,7 @@
  */
 import {mmToPoint,pointToMM,buildPageSizeList,getParameter,showLoading,hideLoading} from '../Utils.js';
 import {alert} from '../MsgBox.js';
+import {getToken} from '../Utils.js'
 
 export default class PDFPrintDialog{
     constructor(){
@@ -185,6 +186,9 @@ export default class PDFPrintDialog{
             const paperData=JSON.stringify(_this.paper);
             $.ajax({
                 type:'POST',
+                headers: {
+                    Authorization: getToken()
+                },
                 data:{_paper:paperData},
                 url:window._server+'/pdf/newPaging'+urlParameters,
                 success:function(){

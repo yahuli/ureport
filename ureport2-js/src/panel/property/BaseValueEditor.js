@@ -3,6 +3,7 @@
  */
 import {setDirty} from '../../Utils.js';
 import PropertyConditionDialog from '../../dialog/PropertyConditionDialog.js';
+import getToken from '../../tools/Tool.js'
 
 export default class BaseValueEditor{
     _buildFillBlankRows(container){
@@ -169,6 +170,9 @@ export default class BaseValueEditor{
                     const url=window._server+'/designer/parseDatasetName';
                     $.ajax({
                         url,
+                        headers: {
+                            Authorization: getToken()
+                        },
                         type:'POST',
                         data:{expr},
                         success:function(result){
@@ -212,6 +216,9 @@ export default class BaseValueEditor{
             const url=window._server+'/designer/scriptValidation';
             $.ajax({
                 url,
+                headers: {
+                    Authorization: getToken()
+                },
                 data:{content:text},
                 type:'POST',
                 success:function(result){

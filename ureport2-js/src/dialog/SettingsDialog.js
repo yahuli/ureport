@@ -4,6 +4,7 @@
 import {alert} from '../MsgBox.js';
 import {pointToMM,mmToPoint,buildPageSizeList,setDirty} from '../Utils.js';
 import FontSettingDialog from './FontSettingDialog.js';
+import {getToken} from '../Utils.js'
 
 export default class SettingsDialog{
     constructor(){
@@ -579,6 +580,9 @@ function checkGrammar(text,callback){
     $.ajax({
         url,
         data:{content:text},
+        headers: {
+            Authorization: getToken()
+        },
         type:'POST',
         success:function(infos){
             let msg='';

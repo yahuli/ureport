@@ -5,6 +5,7 @@ import Tool from './Tool.js';
 import SaveDialog from '../dialog/SaveDialog.js';
 import {alert} from '../MsgBox.js';
 import {resetDirty,tableToXml} from '../Utils.js';
+import {getToken} from '../Utils.js'
 
 export default class SaveTool extends Tool{
     execute(){
@@ -30,6 +31,9 @@ export default class SaveTool extends Tool{
             if(window._reportFile){
                 $.ajax({
                     url:window._server+"/designer/saveReportFile",
+                    headers: {
+                        Authorization: getToken()
+                    },
                     data:{content,file:window._reportFile},
                     type:'POST',
                     success:function(){

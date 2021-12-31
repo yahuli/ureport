@@ -7,6 +7,7 @@ import {alert} from './MsgBox.js';
 import PDFPrintDialog from './dialog/PDFPrintDialog.js';
 import defaultI18nJsonData from './i18n/preview.json';
 import en18nJsonData from './i18n/preview_en.json';
+import {getToken} from './Utils.js'
 (function($){
     $.fn.datetimepicker.dates['zh-CN'] = {
         days: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"],
@@ -37,6 +38,9 @@ $(document).ready(function(){
         $.ajax({
             url,
             type:'POST',
+            headers: {
+                Authorization: getToken()
+            },
             success:function(result){
                 $.get(window._server+'/preview/loadPagePaper'+urlParameters,function(paper){
                     hideLoading();
@@ -257,6 +261,9 @@ function _refreshData(second){
     }
     $.ajax({
         url,
+        headers: {
+            Authorization: getToken()
+        },
         type:'GET',
         success:function(report){
             const tableContainer=$(`#_ureport_table`);
@@ -327,6 +334,9 @@ window._buildChart=function(canvasId,chartJson){
         const height=parseInt(canvas.css('height'));
         $.ajax({
             type:'POST',
+            headers: {
+                Authorization: getToken()
+            },
             data:{_base64Data:base64Image,_chartId:canvasId,_width:width,_height:height},
             url
         });
@@ -353,6 +363,9 @@ window.submitSearchForm=function(file,customParameters){
     }
     $.ajax({
         url,
+        headers: {
+            Authorization: getToken()
+        },
         type:'POST',
         success:function(report){
             window._currentPageIndex=1;
